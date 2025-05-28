@@ -46,7 +46,7 @@ We discovered that students who became dropouts had a heavily right-skewed‬ di
 <img width="559" alt="Screenshot 2025-05-28 at 11 37 26 AM" src="https://github.com/user-attachments/assets/eebbc88e-4a0d-4718-992f-14a9ae24283f" />
 
 
-The “Tuition fees up to date” variable is a binary feature tracking whether the student‬ had fully paid their tuition fees at the time of data collection. In the chart below, it can be seen‬ that a high proportion of students who didn’t keep up with their tuition fees became dropouts.‬ This finding makes us realize how much of an impact financial hardship can play in student‬ retention. Additionally, it was found that students who held scholarships were much more likely‬ to graduate than those who did not. Overall, these visualizations capture risk factors associated‬ with students who dropped out, graduated or are currently enrolled, but also highlight how early‬ academic performance and financial support are needed for students' success.‬
+The “Tuition fees up to date” variable is a binary feature tracking whether the student‬ had fully paid their tuition fees at the time of data collection. In the chart below, it can be seen‬ that a high proportion of students who didn’t keep up with their tuition fees became dropouts.‬ This finding underscores the significant role financial hardship plays in student retention.. Additionally, it was found that students who held scholarships were much more likely‬ to graduate than those who did not. Overall, these visualizations capture risk factors associated‬ with students who dropped out, graduated or are currently enrolled, but also highlight how early‬ academic performance and financial support are needed for students' success.‬
 ‭
 
 <img width="660" alt="Screenshot 2025-05-28 at 11 41 57 AM" src="https://github.com/user-attachments/assets/1cb24e63-d1a4-401a-adc9-da39955bd7cf" />
@@ -106,7 +106,7 @@ It can be seen that the results of the Voting Classifier differed only minutely 
 ‭
 
 ## Project Trajectory:
-At first, we focused on testing baseline models and evaluating them using classification‬‭ reports, paying attention to precision, recall, F1 score, and accuracy. However, a key challenge‬ with this dataset was the class imbalance, clearly shown in the pie chart on page 2. Traditional‬‭ classification metrics can be misleading under imbalance, as they often favor the majority class.‬
+At first, we focused on testing baseline models and evaluating them using classification‬‭ reports, paying attention to precision, recall, F1 score, and accuracy. However, a key challenge‬ with this dataset was the class imbalance, clearly shown in the pie chart (found in Data Exploration section). Traditional‬‭ classification metrics can be misleading under imbalance, as they often favor the majority class.‬
 
 ‭This issue became evident in our baseline results: the Graduate and Dropout classes‬‭ performed well, while the Enrolled class was consistently misclassified. Recognizing this, we shifted our focus toward identifying models that improve performance across all classes,‬‭ particularly the Enrolled class.‬
 
