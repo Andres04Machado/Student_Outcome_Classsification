@@ -13,11 +13,41 @@
 #### Dataset Citation:
 Realinho, Valentim, et al. "Predict Students' Dropout and Academic Success." UCI Machine Learning Repository, 2021, https://doi.org/10.24432/C5MC89.
 
+#### Dataset Source:
+https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success
+
+## 📚 Table of Contents
+- [Project Statement](#project-statement)
+- [Description of Data](#description-of-data)
+- [Data Exploration](#data-exploration)
+- [Data Visualization](#data-visualization)
+- [Feature Selection](#feature-selection)
+- [Preliminary Modeling](#preliminary-modeling)
+- [Tuning Individual Models](#tuning-individual-models)
+- [Consideration of Oversampling Methods (SMOTE)](#consideration-of-oversampling-methods-smote)
+- [Ensemble Methods](#ensemble-methods)
+- [Project Trajectory](#project-trajectory)
+- [Conclusion](#conclusion)
+- [Resources](#resources)
+  
+## 🛠️ How to Run
+Navigate to the [code](https://github.com/Andres04Machado/Student_Outcome_Classsification/tree/main/code) folder and follow these steps
+1. **Download** the `.ipynb` notebook file `Student_Outcome_Classification.ipynb`.
+2. **Open** the notebook using [Jupyter Notebook](https://jupyter.org/install) or [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/).
+3. Run
+   
+```bash
+pip install -r requirements.txt
+```
+
+4. **Run all cells to your heart's content!**
+
+*Note: If you would like to see any of the plots or charts as `.png` files, please check out the [plots_charts](https://github.com/Andres04Machado/Student_Outcome_Classsification/tree/main/plots_charts) folder.*
 ## Project Statement
-‭Student retention is a major problem for institutes of higher education, with many‬ resources devoted to analyzing what causes students to drop out or graduate late. When the‬ graduation rate falls, so does a school’s ranking and reputation. For this reason it’s desirable to‬ reach out to these students early in their academic path, so they can receive extra counseling or‬ attention that may improve their situation. For this project, we attempt to use data collected from‬ ‭university students to predict whether they will be graduates, dropouts, or still enrolled at the‬ end of a typical program term. Some variables of particular interest are the student’s age at‬ ‭enrollment, scholarship status, and early grades. We will use classification algorithms with‬ considerations for reducing class imbalance. The objective is to identify students at risk of failing‬ to graduate, so that they can be prioritized for assistance.‬
+‭Student retention is a major problem for institutes of higher education, with many‬ resources devoted to analyzing what causes students to drop out or graduated late. When the‬ graduation rate falls, so does a school’s ranking and reputation. For this reason it’s desirable to‬ reach out to these students early in their academic path, so they can receive extra counseling or‬ attention that may improve their situation. For this project, we attempt to use data collected from‬ ‭university students to predict whether they will be graduates, dropouts, or still enrolled at the‬ end of a typical program term. Some variables of particular interest are the student’s age at‬ ‭enrollment, scholarship status, and early grades. We will use classification algorithms with‬ considerations for reducing class imbalance. Our goal was to build a classification model that identifies students at risk of not graduating, enabling proactive intervention.
 ‭
 ## Description of Data:‬
-‭Broadly speaking, this project's focus is predicting the academic success of university‬ students. We are working with a tabular dataset which lists 37 attributes for each of 4,424‬ students at the Polytechnic Institute of Portalegre, and contains contains 18 categorical features‬ which encode information such as the student’s program, marital status, application mode, and‬ their parents’ level of education. Some of the quantitative variables encode the student’s age‬ and numerical evaluations (0-100) of their admission profile and previous qualifications, and‬ other quantitative variables which detail the number of curricular units for which the student was‬ enrolled, approved, and credited during their first two semesters. The dataset’s target variable is‬ a categorical column which designates each student as one of the following:‬
+‭Broadly speaking, this project's focus is predicting the academic success of university‬ students. We are working with a tabular dataset which lists 37 attributes for each of 4,424‬ students at the Polytechnic Institute of Portalegre, and contains 18 categorical features‬ which encode information such as the student’s program, marital status, application mode, and‬ their parents’ level of education. Some of the quantitative variables encode the student’s age‬ and numerical evaluations (0-100) of their admission profile and previous qualifications, and‬ other quantitative variables which detail the number of curricular units for which the student was‬ enrolled, approved, and credited during their first two semesters. The dataset’s target variable is‬ a categorical column which designates each student as one of the following:‬
 
 * **Enrolled**‬‭: Indicating that the student was still enrolled‬‭ (not graduated) at the end of the‬ normal term of the program. Where 794 students classify as Enrolled.‬
 * **Graduated‬‭**: Indicating the student graduated by the‬‭ end of the normal term of the‬ program. Where 2,209 students classify as Graduated.‬
@@ -29,7 +59,7 @@ https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+su
 ## Data Exploration:
 One of the dataset’s issues is containing many categorical features, each of which‬ consists of many different levels. For example, the “Application mode” variable alone has 18‬ levels, some of which apply to fewer than 10 students. If all of these categorical features were‬ one-hot encoded, they would add hundreds of sparse columns to the dataset and create‬ unnecessary bulk during the data exploration. For this reason, it was decided that all categorical‬ feature levels representing less than 2% of the dataset would be binned into one level called‬ “Other”. This significantly reduced the unnecessary complexity in the dataset.‬
 
-‭While checking the data, we also noticed that there were 180 students listed as having‬ enrolled in 0 curricular units during both their first and second semester. This may be attributed‬ to faulty data collection or other unusual circumstances. For the purpose of predicting student‬ success, we considered these records to be highly anomalous and decided to remove them‬ from the dataset. After this removal, the dataset contained 4,244 records.
+‭While checking the data, we also noticed that there were 180 students that were listed as having‬ enrolled in 0 curricular units during both their first and second semester. This may be attributed‬ to faulty data collection or other unusual circumstances. For the purpose of predicting student‬ success, we considered these records to be highly anomalous and decided to remove them‬ from the dataset. After this removal, the dataset contained 4,244 records.
 ‭
 ‭It’s important to note that the target classes are‬ imbalanced. About 50% of the students are graduates,‬ 18% are enrolled, and 31.7% are dropouts. This will‬ inform our modeling and experimental design. To‬ account for the unbalanced classes, it may be‬ necessary to use methods like Stratified K-Folds or‬ SMOTE.‬
 ‭
@@ -37,10 +67,10 @@ One of the dataset’s issues is containing many categorical features, each of w
 ‬<img width="225" alt="Screenshot 2025-05-28 at 10 33 04 AM" src="https://github.com/user-attachments/assets/d4783848-c898-44a3-8f12-1d68b9c176bf" />
 
 ## Data Visualization:
-To understand the features that influence the students final outcome, we visualized key‬ features in relation to the target variable. Each of the following plots helped us gain a deeper‬ knowledge of the demographics, financial, and academic patterns that distinguish students from‬ graduates, dropouts, and currently enrolled.‬
+Using `seaborn`, `plotly`, and `matplotlib` we looked to understand the features that influence the students final academic outcome. We first visualized key‬ features in relation to the target variable. Each of the following plots helped us gain a deeper‬ knowledge of the demographics, financial, and academic patterns that distinguish students from‬ graduates, dropouts, and currently enrolled.‬
 ‭ 
 
-We discovered that students who became dropouts had a heavily right-skewed‬ distribution of age of enrollment as compared to the other classes. We also noticed that within‬ the first semester grades variable, a clear cluster of dropouts had grades centered around 0. In‬ contrast, those students who graduated displayed a more balanced and higher spread of‬ grades
+We discovered that dropout students had a heavily right-skewed‬ distribution of age of enrollment as compared to the other classes. We also noticed that within‬ the first semester grades variable, a clear cluster of dropouts had grades centered around 0. In‬ contrast, those students who graduated displayed a more balanced and higher spread of‬ grades
 
 
 <img width="559" alt="Screenshot 2025-05-28 at 11 37 26 AM" src="https://github.com/user-attachments/assets/eebbc88e-4a0d-4718-992f-14a9ae24283f" />
@@ -55,13 +85,13 @@ The “Tuition fees up to date” variable is a binary feature tracking whether 
 When starting the feature selection, it was essential to consider how to handle each‬ main variable data type-categorical/nominal and numerical. For each of these data types,‬ feature selection was treated differently; for categorical features, we use Cramer's V statistic,‬ which utilises the Chi-squared statistic and transformations to provide a value between 0 and 1‬ for a pair of categorical features. Alternatively, for numerical variables, we used Pearson’s‬ Correlation Coefficient and the SelectKBest algorithm with the ANOVA F-stat scoring function.‬
 ‭ 
 
-One observation worth noting was a tremendous amount of multicollinearity between‬ 1st-semester features and their 2nd-semester counterparts. To generalize our features as much‬ as possible, we opted to keep the 1st-semester features. We also dropped features that were‬ not clearly defined when we collected the data.‬
+One observation worth noting was a high degree of multicollinearity between‬ 1st-semester features and their 2nd-semester counterparts. To generalize our features as much‬ as possible, we opted to keep the 1st-semester features. We also dropped features that were‬ not clearly defined when we collected the data.‬
 ‭
 
 Of the 17 categorical features the dataset provided, 14 were selected. However, out of‬ the 19 numerical features the dataset provided, 7 were selected; meaning, we began with 36‬ features, but settled on 21 once selection was complete.‬
 ‭
 
-## Preliminar Modeling:
+## Preliminary Modeling:
 We established a baseline of evaluation metrics for several different classification‬ techniques, each using 5-fold stratified cross-validation on the dataset. The models were‬ initialized without tuning of hyperparameters. The results are summarized in the table below:
 
 
@@ -78,7 +108,7 @@ We also noted that among the baseline models, the Gaussian Naive Bayes model‬ 
 
 We tried to improve each individual model as much as possible before combining them‬ into a final ensemble model. This consisted of tuning each model’s hyperparameters. We used‬‭ the weighted F1 score as our metric because of our class imbalances. Below is a summary of‬‭ the results of hyperparameter tuning each model:‬
 
-- <ins>Logistic Regression</ins> : The most substantial opportunity‬‭ for hypertuning this model is‬ manually adjusting the impact of a regularization term, in order to prevent overfitting to‬‭ the training data. We found that after hypertuning with GridSearchCV, the L1 penalty is‬‭ optimal for our Logistic Regression model which promotes sparsity in our coefficients.‬‭ The optimal parameters included a C value of 10, maximum iterations of 500, and using‬‭ the ‘saga’ solver instead of ‘liblinear’. The weighted F1 score for our optimal model is‬ 0.73. However, although overall model accuracy increased, the predictions for the‭ Enrolled class still lagged behind.‬
+- <ins>Logistic Regression</ins> : The most substantial opportunity‬‭ for hypertuning this model is‬ manually adjusting the impact of a regularization term, in order to prevent overfitting to‬‭ the training data. We found that after hyperparameter tuning with GridSearchCV, the L1 penalty is‬‭ optimal for our Logistic Regression model which promotes sparsity in our coefficients.‬‭ The optimal parameters included a C value of 10, maximum iterations of 500, and using‬‭ the ‘saga’ solver instead of ‘liblinear’. The weighted F1 score for our optimal model is‬ 0.73. However, although overall model accuracy increased, the predictions for the‭ Enrolled class still lagged behind.‬
 - <ins>Support Vector Machine</ins>: The Support Vector Machine‬‭ allows the use of different kernel‬ functions, rather than the default radial kernel. It also permits adjustment of the‬ parameter C, which controls the penalty of margin violations and thus affects the width of‬ the margin. We found that after hypertuning with GridSearchCV, we found that a C value‬ of 10 was optimal. Also, the radial kernel remained as the best kernel and leaving the‬ ‘gamma’ parameter as ‘auto’ made the model optimal. The weighted F1 score for our‬‭ optimal model was also 0.74.
 - <ins>Naive Bayes</ins>: Due to the nature of the algorithm, there was not much flexibility to tune‬ the Gaussian Naive Bayes model. For this reason, we decided to simply pass it through‬‭ with default parameters to the later modeling processes.
 
