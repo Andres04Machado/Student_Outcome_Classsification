@@ -7,7 +7,7 @@
 ![Status](https://img.shields.io/badge/status-completed-green)
 
 
-**Authors**: Andres Machado, Bret Geyer, Jackson Small, Jackson Colon, and Thomas Tibbetts<br>
+**Authors**: Andres Machado, Bret Geyer, Jackson Small, Jadan Colon, and Thomas Tibbetts<br>
 *Spring 2025 | Data Science II*
 
 #### Dataset Citation:
